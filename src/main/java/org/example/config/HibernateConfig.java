@@ -10,7 +10,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import java.util.Properties;
-
+//Configuration of the database and only the database. Hvis jeg får fejl lige når jeg trykker play. Tjek Pom filen og tjek at database navnet stemmer i properties DB
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class HibernateConfig {
     private static EntityManagerFactory entityManagerFactory;

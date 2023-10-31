@@ -23,7 +23,7 @@
             <issuer>cphbusiness.dk</issuer>
             <token.expiration.time>3600000</token.expiration.time>
             <!--  DB    -->
-            <db.name>StartcodeExam</db.name>
+            <db.name>StartcodeExam</db.name> <!-- Hvis noget i databasen er gået galt. Tjek om database navnet stemmer overens med det i pom.xml -->
             <db.username>postgres</db.username>
             <db.password>postgres</db.password>
             <db.connection.string>jdbc:postgresql://localhost:5432/</db.connection.string>

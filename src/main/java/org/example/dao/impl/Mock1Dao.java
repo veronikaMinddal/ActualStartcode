@@ -23,10 +23,10 @@ public class Mock1Dao implements IDao<Mock1, Integer>
     }
 
     @Override
-    public Mock1 read(Integer integer) {
+    public Mock1 read(Integer id) {
        try (var em = emf.createEntityManager())
        {
-           return em.find(Mock1.class, integer);
+           return em.find(Mock1.class, id);
        }
     }
 

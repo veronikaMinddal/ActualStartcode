@@ -8,7 +8,7 @@ import org.example.routes.Routes;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
+//Confuguration of API and only the API.
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class ApplicationConfig {
 

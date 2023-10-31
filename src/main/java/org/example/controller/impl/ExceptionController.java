@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ExceptionController {
-    private final Logger LOGGER = LoggerFactory.getLogger(Routes.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(Routes.class); //svarer til sout med ude på hjemmesiden. bruges til at lave exceptions på API
 
     public void apiExceptionHandler(ApiException e, Context ctx) {
         LOGGER.error(ctx.attribute("requestInfo") + " " + ctx.res().getStatus() + " " + e.getMessage());
