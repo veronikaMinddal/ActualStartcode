@@ -6,10 +6,7 @@ import io.javalin.http.Context;
 import jakarta.persistence.EntityManagerFactory;
 import org.example.controller.IController;
 import org.example.dao.impl.Mock1Dao;
-import org.example.dto.Mock1Dto;
 import org.example.model.Mock1;
-
-import java.util.List;
 
 public class Mock1Controller implements IController<Mock1, Integer>
 {

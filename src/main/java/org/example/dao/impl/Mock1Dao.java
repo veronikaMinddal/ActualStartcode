@@ -10,12 +10,13 @@ import java.util.List;
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class Mock1Dao implements IDao<Mock1, Integer>
 {
-
     private static Mock1Dao instance;
     private static EntityManagerFactory emf;
 
-    public static Mock1Dao getInstance(EntityManagerFactory _emf) {
-        if (instance == null) {
+    public static Mock1Dao getInstance(EntityManagerFactory _emf)
+    {
+        if (instance == null)
+        {
             emf = _emf;
             instance = new Mock1Dao();
         }
@@ -23,15 +24,17 @@ public class Mock1Dao implements IDao<Mock1, Integer>
     }
 
     @Override
-    public Mock1 read(Integer integer) {
+    public Mock1 read(Integer id)
+    {
        try (var em = emf.createEntityManager())
        {
-           return em.find(Mock1.class, integer);
+           return em.find(Mock1.class, id);
        }
     }
 
     @Override
-    public List<Mock1> readAll() {
+    public List<Mock1> readAll()
+    {
         try (var em = emf.createEntityManager())
         {
             var query = em.createQuery("SELECT m1 FROM Mock1 m1", Mock1.class);
@@ -40,7 +43,8 @@ public class Mock1Dao implements IDao<Mock1, Integer>
     }
 
     @Override
-    public Mock1 create(Mock1 mock1) {
+    public Mock1 create(Mock1 mock1)
+    {
         try (var em = emf.createEntityManager())
         {
             em.getTransaction().begin();
@@ -51,8 +55,10 @@ public class Mock1Dao implements IDao<Mock1, Integer>
     }
 
     @Override
-    public Mock1 update(Integer id, Mock1 updated) {
-        try(var em = emf.createEntityManager()) {
+    public Mock1 update(Integer id, Mock1 updated)
+    {
+        try(var em = emf.createEntityManager())
+        {
             em.getTransaction().begin();
 
             var mock1 = em.find(Mock1.class, id);
@@ -65,8 +71,10 @@ public class Mock1Dao implements IDao<Mock1, Integer>
     }
 
     @Override
-    public void delete(Integer id) {
-        try(var em = emf.createEntityManager()) {
+    public void delete(Integer id)
+    {
+        try(var em = emf.createEntityManager())
+        {
             em.getTransaction().begin();
             var mock1 = em.find(Mock1.class, id);
             em.remove(mock1);
