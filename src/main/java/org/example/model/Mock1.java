@@ -30,4 +30,9 @@ public class Mock1
         this.mock1String = mock1String;
         this.mock1Number = mock1Number;
     }
+
+    public boolean validateNewMock1()
+    {
+        return mock1String != null && mock1Number != null;
+    }
 }

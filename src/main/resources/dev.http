@@ -1,1 +1,6 @@
-GET http://localhost:7071/api/v1/mock1s/
+POST http://localhost:7071/api/v1/mock1s/
+
+{
+"mock1String": "",
+"mock1Number": 12
+}
