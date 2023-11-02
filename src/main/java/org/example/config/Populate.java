@@ -3,22 +3,34 @@ package org.example.config;
 import jakarta.persistence.EntityManagerFactory;
 import org.example.dao.impl.Mock1Dao;
 import org.example.dao.impl.Mock2Dao;
+import org.example.exception.ApiException;
 import org.example.model.Mock1;
 import org.example.model.Mock2;
-
 import java.util.List;
 
 public class Populate
 {
-    private static EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
-    private static Mock1Dao mock1Dao = Mock1Dao.getInstance(emf);
-    private static Mock2Dao mock2Dao = Mock2Dao.getInstance(emf);
+    private static final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
+    private static final Mock1Dao mock1Dao = Mock1Dao.getInstance(emf);
+    private static final Mock2Dao mock2Dao = Mock2Dao.getInstance(emf);
     public static void main(String[] args)
     {
         List<Mock1> mock1s = populateMock1();
         List<Mock2> mock2s = populateMock2();
-        mock1s.forEach(mock1 -> mock1Dao.create(mock1));
-        mock2s.forEach(mock2 -> mock2Dao.create(mock2));
+        try
+        {
+            for (Mock1 mock1 : mock1s)
+            {
+                mock1Dao.create(mock1);
+            }
+            for (Mock2 mock2 : mock2s)
+            {
+                mock2Dao.create(mock2);
+            }
+        }catch (ApiException e)
+        {
+            System.out.println("Something went wrong");
+        }
     }
 
     public static List<Mock1> populateMock1()
@@ -34,10 +46,10 @@ public class Populate
     {
         //Pretending mock1 is vendors
         Mock2 Walmart = new Mock2(1, "Walmart");
-        Mock2 Target = new Mock2(2, "Target");
-        Mock2 GameStop = new Mock2(3, "GameStop");
-        Mock2 BestBuy = new Mock2(4, "Best Buy");
+        Mock2 Faraos = new Mock2(2, "Faraos");
+        Mock2 Kelzor = new Mock2(3, "Kelzor");
+        Mock2 CardMarket = new Mock2(4, "CardMarket");
 
-        return List.of(Walmart, Target, GameStop, BestBuy);
+        return List.of(Walmart, Faraos, Kelzor, CardMarket);
     }
 }

@@ -1,10 +1,9 @@
 package org.example.dao.impl;
 
-import org.example.dao.IDao;
-import org.example.model.Mock1;
-import org.example.model.Mock2;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
+import org.example.dao.IDao;
+import org.example.model.Mock2;
 
 import java.util.List;
 

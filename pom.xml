@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>ActualStartcode</artifactId>
+    <artifactId>ActualStartcode</artifactId> <!-- This is the name of the project -->
     <version>1.0-SNAPSHOT</version>
 
         <properties>
@@ -18,17 +18,7 @@
             <junit.version>5.9.1</junit.version>
 
             <!-- Project properties  -->
-            <!--  token    -->
-            <secret.key>841D8A6C80CBA4FCAD32D5367C18C53B</secret.key>
-            <issuer>cphbusiness.dk</issuer>
-            <token.expiration.time>3600000</token.expiration.time>
-            <!--  DB    -->
-            <db.name>StartcodeExam</db.name>
-            <db.username>postgres</db.username>
-            <db.password>postgres</db.password>
-            <db.connection.string>jdbc:postgresql://localhost:5432/</db.connection.string>
-            <!--  Javalin    -->
-            <javalin.port>7070</javalin.port>
+
         </properties>
         <dependencies>
 
@@ -57,21 +47,6 @@
                 <version>1.18.28</version>
                 <scope>provided</scope>
             </dependency>
-
-            <!--   Security     -->
-
-            <dependency>
-                <!--  https://nimbusds.com/products/nimbus-jose-jwt   -->
-                <groupId>com.nimbusds</groupId>
-                <artifactId>nimbus-jose-jwt</artifactId>
-                <version>9.0.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mindrot</groupId>
-                <artifactId>jbcrypt</artifactId>
-                <version>0.4</version>
-            </dependency>
-
             <!--  DB    -->
 
             <dependency>

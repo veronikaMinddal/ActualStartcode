@@ -1,8 +1,9 @@
 package org.example.dao.impl;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import org.example.dao.IDao;
+import org.example.exception.ApiException;
 import org.example.model.Mock1;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
@@ -25,11 +26,11 @@ public class Mock1Dao implements IDao<Mock1, Integer>
     }
 
     @Override
-    public Mock1 read(Integer id)
+    public Mock1 read(Integer id) throws ApiException
     {
         if(!validateId(id))
         {
-            throw new IllegalArgumentException("Id does not exist");
+            throw new ApiException(404, "Id does not exist");
         }
         try (var em = emf.createEntityManager())
         {
@@ -48,25 +49,23 @@ public class Mock1Dao implements IDao<Mock1, Integer>
     }
 
     @Override
-    public Mock1 create(Mock1 mock1)
+    public Mock1 create(Mock1 mock1) throws ApiException
     {
         try (var em = emf.createEntityManager())
         {
-            em.getTransaction().begin();
-            em.persist(mock1);
-            em.getTransaction().commit();
-            return mock1;
+            if(!mock1.validateNewMock1()) {throw new ApiException(400, "Mock1 is not valid");}
+                em.getTransaction().begin();
+                em.persist(mock1);
+                em.getTransaction().commit();
+                return mock1;
         }
 
     }
 
     @Override
-    public Mock1 update(Integer id, Mock1 updated)
+    public Mock1 update(Integer id, Mock1 updated) throws ApiException
     {
-        if (!validateId(id))
-        {
-            throw new IllegalArgumentException("Id does not exist");
-        } else
+        if (!validateId(id)) {throw new ApiException(404, "Id does not exist");} else
         {
             try (var em = emf.createEntityManager())
             {
@@ -83,12 +82,9 @@ public class Mock1Dao implements IDao<Mock1, Integer>
     }
 
     @Override
-    public void delete(Integer id)
+    public void delete(Integer id) throws ApiException
     {
-        if (!validateId(id))
-        {
-            throw new IllegalArgumentException("Id does not exist");
-        }
+        if (!validateId(id)) {throw new ApiException(404,"Id does not exist");}
         try(var em = emf.createEntityManager())
         {
             em.getTransaction().begin();
@@ -102,7 +98,7 @@ public class Mock1Dao implements IDao<Mock1, Integer>
     {
         try(EntityManager em = emf.createEntityManager())
         {
-            var query = em.createQuery("SELECT m1.id FROM Mock1 m1", Mock1.class);
+            TypedQuery<Integer> query = em.createQuery("SELECT m1.id FROM Mock1 m1", Integer.class);
             return query.getResultList().contains(id);
         }
     }

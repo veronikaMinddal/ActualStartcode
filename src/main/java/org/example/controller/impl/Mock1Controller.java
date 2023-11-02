@@ -1,13 +1,12 @@
 package org.example.controller.impl;
 
-import org.example.config.HibernateConfig;
-
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManagerFactory;
+import org.example.config.HibernateConfig;
 import org.example.controller.IController;
 import org.example.dao.impl.Mock1Dao;
 import org.example.dto.Mock1Dto;
-import org.example.exception.Message;
+import org.example.exception.ApiException;
 import org.example.model.Mock1;
 
 import java.util.List;
@@ -23,16 +22,24 @@ public class Mock1Controller implements IController<Mock1, Integer>
     }
 
     @Override
-    public void read(Context ctx)
+    public void read(Context ctx) throws ApiException
     {// request
-        int id = ctx.pathParamAsClass("id", Integer.class).get();
-        // entity
-        Mock1 mock1 = dao.read(id);
-        // dto
-        Mock1Dto mock1Dto = new Mock1Dto(mock1);
-        // response
-        ctx.res().setStatus(200);
-        ctx.json(mock1, Mock1.class);
+        try
+        {
+            int id = ctx.pathParamAsClass("id", Integer.class).get();
+            // entity
+            Mock1 mock1 = dao.read(id);
+            // dto
+            Mock1Dto mock1Dto = new Mock1Dto(mock1);
+            // response
+            ctx.res().setStatus(200);
+            ctx.json(mock1Dto, Mock1.class);
+        }
+        catch (IllegalArgumentException e)
+        {
+            ctx.res().setStatus(404);
+            ctx.result(e.getMessage());
+        }
     }
 
     @Override
